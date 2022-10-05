@@ -23,11 +23,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role']], function () {
     Route::resources([
         'post' => PostController::class,
         'category' => CategoryController::class,
     ]);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
